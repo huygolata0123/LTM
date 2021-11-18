@@ -13,7 +13,7 @@ import java.net.ServerSocket;
  * @author Bong
  */
 public class GetFreePort {
-   private boolean isPortAvailable(int port) {
+ private boolean isPortAvailable(int port) {
         boolean portAvailable = true;
         ServerSocket serverSocket = null;
         try {

@@ -5,6 +5,7 @@
  */
 package remoteandroid;
 
+
 import ipaddress.GetFreePort;
 import ipaddress.GetMyIpAddress;
 import java.awt.Label;
@@ -15,9 +16,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.security.Provider.Service;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 
 
 
@@ -44,10 +43,7 @@ public  class ServerFrame extends javax.swing.JFrame {
         String ipAddresses[] = new GetMyIpAddress().ipAddress();
         String connectionStatus = "Not Connected";
         int port = new GetFreePort().getFreePort();
-        String ipAddress = ipAddresses[1];
-        if (ipAddresses[1] != null) {
-            ipAddress = ipAddress + " | " + ipAddresses[1];
-        }
+        String ipAddress = ipAddresses[0];
         ipAddresstxt.setText(ipAddress);
         portNumberLabel.setText(Integer.toString(port));
         connectionStatusLabel.setText(connectionStatus);
@@ -89,8 +85,6 @@ public  class ServerFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         connectionStatusLabel = new javax.swing.JLabel();
         resetButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
-        rootButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,10 +107,6 @@ public  class ServerFrame extends javax.swing.JFrame {
             }
         });
 
-        backButton.setText("Back");
-
-        rootButton.setText("Root");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,32 +121,24 @@ public  class ServerFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(29, 29, 29)
-                                .addComponent(ipAddresstxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ipAddresstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(portNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(resetButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(backButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rootButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(resetButton)))
+                .addGap(289, 289, 289))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backButton)
-                    .addComponent(rootButton))
-                .addGap(11, 11, 11)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(ipAddresstxt))
@@ -244,7 +226,6 @@ public  class ServerFrame extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
     private static javax.swing.JLabel connectionStatusLabel;
     private static javax.swing.JLabel ipAddresstxt;
     private javax.swing.JLabel jLabel1;
@@ -252,6 +233,5 @@ public  class ServerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private static javax.swing.JLabel portNumberLabel;
     private javax.swing.JButton resetButton;
-    private javax.swing.JButton rootButton;
     // End of variables declaration//GEN-END:variables
 }
