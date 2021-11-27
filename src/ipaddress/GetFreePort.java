@@ -33,7 +33,7 @@ public class GetFreePort {
     }
     
     public int getFreePort() {
-        int port = 3000;
+        int port = 15000;
         while (true) {
             if (isPortAvailable(port) == true) {
                 break;

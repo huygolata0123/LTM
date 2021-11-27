@@ -5,7 +5,6 @@
  */
 package remoteandroid;
 
-
 import ipaddress.GetFreePort;
 import ipaddress.GetMyIpAddress;
 import java.awt.Label;
@@ -14,17 +13,18 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.Provider.Service;
 import javafx.application.Platform;
-
-
+import javafx.concurrent.Task;
 
 /**
  *
  * @author Bong
  */
-public  class ServerFrame extends javax.swing.JFrame {
+public class ServerFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form ServerFrame
@@ -35,40 +35,20 @@ public  class ServerFrame extends javax.swing.JFrame {
     public static OutputStream outputStream = null;
     public static ObjectOutputStream objectOutputStream = null;
     public static ObjectInputStream objectInputStream = null;
-    private  Label messageLabel;
-    
-    
+
+
     public ServerFrame() {
         initComponents();
         String ipAddresses[] = new GetMyIpAddress().ipAddress();
-        String connectionStatus = "Not Connected";
+        String connectionStatus = "Connected";
         int port = new GetFreePort().getFreePort();
         String ipAddress = ipAddresses[0];
         ipAddresstxt.setText(ipAddress);
         portNumberLabel.setText(Integer.toString(port));
-        connectionStatusLabel.setText(connectionStatus);
-        if (ipAddresses[0].equals("127.0.0.1")) {
-            showMessage("Connect your PC to Android phone hotspot or" +
-                    " connect both devices to a local network.");
-        } else {
-            try {
-                serverSocket = new ServerSocket(port);
-            } catch(Exception e) {
-                showMessage("Error in initializing server");
-                e.printStackTrace();
-            }
-        }
+        connectionStatusLabel.setText(connectionStatus);     
     }
-     
-    public  void showMessage(String message) {
-        Platform.runLater(() -> {
-            messageLabel.setText(message);
-        });
-    }
-    
-    
-    
-   
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -158,14 +138,14 @@ public  class ServerFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
         try {
-             if (serverSocket != null) {
+            if (serverSocket != null) {
                 serverSocket.close();
-                     }
-                if (clientSocket != null) {
+            }
+            if (clientSocket != null) {
                 clientSocket.close();
             }
             if (inputStream != null) {
@@ -180,8 +160,8 @@ public  class ServerFrame extends javax.swing.JFrame {
             if (objectInputStream != null) {
                 objectInputStream.close();
             }
-       
-        } catch(IOException e){
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
         new ServerFrame().setVisible(true);
@@ -191,17 +171,20 @@ public  class ServerFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+       new ServerFrame().setVisible(true);
+       Server.main(args);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */    
-        
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                     
                     break;
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
@@ -214,16 +197,16 @@ public  class ServerFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ServerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+                
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServerFrame().setVisible(true);
+               
+                
             }
         });
     }
-  
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JLabel connectionStatusLabel;
